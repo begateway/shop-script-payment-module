@@ -4,7 +4,7 @@ msgstr ""
 msgid "Shop Id"
 msgstr ""
 
-msgid "Shop secret type"
+msgid "Shop secret key"
 msgstr ""
 
 msgid "Transaction type"

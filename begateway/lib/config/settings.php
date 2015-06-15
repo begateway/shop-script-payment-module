@@ -3,19 +3,19 @@
 return array(
 	'SHOP_ID'    => array(
         'value'        => '',
-        'title'        => $this->_w('Идентификационный номер магазина'),
+        'title'        => $this->_w('Shop Id'),
         'description'  => '',
         'control_type' => waHtmlControl::INPUT,
     ),
   'SHOP_KEY'    => array(
         'value'        => '',
-        'title'        => $this->_w('Секретный ключ магазина'),
+        'title'        => $this->_w('Shop secret key'),
         'description'  => '',
         'control_type' => waHtmlControl::INPUT,
     ),
 	'PAYMENT_TYPE'    => array(
         'value'        => '',
-        'title'        => $this->_w('Тип платежа'),
+        'title'        => $this->_w('Transaction type'),
         'description'  => '',
         'control_type' => waHtmlControl::SELECT,
         'options'      => array(
@@ -25,14 +25,14 @@ return array(
    ),
    'DOMAIN_GATEWAY'     => array(
          'value'        => '',
-         'title'        => $this->_w('Домен платежного шлюза'),
-         'description'  => $this->_w('Узнайте значениe этого параметра у вашей платежной компании'),
+         'title'        => $this->_w('Payment gateway domain'),
+         'description'  => $this->_w('Ask your payment processor for these options values'),
          'control_type' => waHtmlControl::INPUT,
    ),
    'DOMAIN_PAYMENTPAGE' => array(
          'value'        => '',
-         'title'        => $this->_w('Домен платежной страницы'),
-         'description'  => $this->_w('Узнайте значениe этого параметра у вашей платежной компании'),
+         'title'        => $this->_w('Payment page domain'),
+         'description'  => $this->_w('Ask your payment processor for these options values'),
          'control_type' => waHtmlControl::INPUT,
    )
 );

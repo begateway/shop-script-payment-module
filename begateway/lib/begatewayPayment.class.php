@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/bepaid-api-php/lib/ecomcharge.php';
 
-class ecomchargePayment extends waPayment implements waIPayment, waIPaymentCancel, waIPaymentRefund
+class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel, waIPaymentRefund
 {
   public function allowedCurrency()
   {

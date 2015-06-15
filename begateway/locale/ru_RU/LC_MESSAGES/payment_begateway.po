@@ -4,7 +4,7 @@ msgstr "Оплата банковской картой"
 msgid "Shop Id"
 msgstr "Идентификационный номер магазина"
 
-msgid "Shop secret type"
+msgid "Shop secret key"
 msgstr "Секретный ключ магазина"
 
 msgid "Transaction type"
