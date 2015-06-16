@@ -1,6 +1,3 @@
-msgid "Pay by credit or debit card"
-msgstr "Оплата банковской картой"
-
 msgid "Shop Id"
 msgstr "Идентификационный номер магазина"
 
