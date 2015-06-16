@@ -1,6 +1,3 @@
-msgid "Pay by credit or debit card"
-msgstr ""
-
 msgid "Shop Id"
 msgstr ""
 
