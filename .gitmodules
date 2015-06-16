@@ -1,0 +1,3 @@
+[submodule "begateway/lib/bepaid-api-php"]
+	path = begateway/lib/bepaid-api-php
+	url = https://github.com/ecomcharge/bepaid-api-php.git
