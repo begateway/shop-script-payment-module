@@ -1,6 +1,6 @@
 ## Shop-Script payment module
 
-[Русская версия](#модуль-оплаты-shop-script)
+[Русская версия](#Модуль-оплаты-shop-script)
 
 ### Install plugin
 
