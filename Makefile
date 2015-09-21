@@ -1,2 +1,3 @@
 all:
-	cd begateway &&	zip -r ../begateway.zip *
+	if [[ -e begateway.zip ]]; then rm begateway.zip; fi
+	zip -r begateway.zip begateway
