@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/bepaid-api-php/lib/ecomcharge.php';
+require_once __DIR__ . '/begateway-api-php/lib/beGateway.php';
 
 class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel, waIPaymentRefund
 {
@@ -33,7 +33,7 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
       $description = preg_replace('/[^\.\?,\[]\(\):;"@\\%\s\w\d]+/', ' ', $order->description);
       $description = preg_replace('/[\s]{2,}/', ' ', $description);
 
-      $transaction = new \eComCharge\GetPaymentPageToken();
+      $transaction = new \beGateway\GetPaymentToken();
 
       if ($this->PAYMENT_TYPE == waPayment::OPERATION_AUTH_ONLY) {
         $transaction->setAuthorizationTransactionType();
@@ -101,7 +101,7 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
 
     if ($this->post && empty($request['token'])) {
       $this->init();
-      $this->webhook = new \eComCharge\Webhook();
+      $this->webhook = new \beGateway\Webhook();
 
       if ($this->webhook->getResponse()) {
         $tracking_id = $this->webhook->getResponse()->transaction->tracking_id;
@@ -137,7 +137,7 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
     switch ($transaction_result) {
       case 'notification':
 
-        $query = new \eComCharge\QueryByUid();
+        $query = new \beGateway\QueryByUid();
         $query->setUid( $this->webhook->getUid() );
         $response = $query->submit();
 
@@ -147,7 +147,7 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
         $transaction_data = $this->formalizeData($request);
 
         if($response->isSuccess() && $this->order_id == $order_id) {
-          $money = new \eComCharge\Money;
+          $money = new \beGateway\Money;
           $money->setCurrency($response->getResponse()->transaction->currency);
           $money->setCents($response->getResponse()->transaction->amount);
 
@@ -237,10 +237,10 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
 
   protected function init() {
     parent::init();
-    \eComCharge\Settings::$apiBase = 'https://' . $this->DOMAIN_GATEWAY;
-    \eComCharge\Settings::$checkoutBase = 'https://' . $this->DOMAIN_PAYMENTPAGE;
-    \eComCharge\Settings::setShopId($this->SHOP_ID);
-    \eComCharge\Settings::setShopKey($this->SHOP_KEY);
+    \beGateway\Settings::$gatewayBase = 'https://' . $this->DOMAIN_GATEWAY;
+    \beGateway\Settings::$checkoutBase = 'https://' . $this->DOMAIN_PAYMENTPAGE;
+    \beGateway\Settings::$shopId = $this->SHOP_ID;
+    \beGateway\Settings::$shopKey = $this->SHOP_KEY;
     return parent::init();
   }
 }
