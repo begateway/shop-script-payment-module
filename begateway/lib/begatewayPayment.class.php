@@ -52,11 +52,23 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
       $transaction->setDeclineUrl($url_fail);
       $transaction->setCancelUrl(wa()->getRootUrl(true));
 
-      $transaction->customer->setFirstName($contact->get('firstname', 'default'));
-      $transaction->customer->setLastName($contact->get('lastname', 'default'));
-      $transaction->customer->setAddress($contact->get('address:street', 'default'));
-      $transaction->customer->setCity($contact->get('address:city', 'default'));
-      $transaction->customer->setZip($contact->get('address:zip', 'default'));
+      $firstname = $contact->get('firstname', 'default');
+      $lastname = $contact->get('lastname', 'default');
+      $address = $contact->get('address:street', 'default');
+      $city = $contact->get('address:city', 'default');
+      $zip = $contact->get('address:zip', 'default');
+
+      if (strlen($firstname) > 0)
+        $transaction->customer->setFirstName($firstname);
+      if (strlen($lastname) > 0)
+        $transaction->customer->setLastName($lastname);
+      if (strlen($address) > 0)
+        $transaction->customer->setAddress($address);
+      if (strlen($city) > 0)
+        $transaction->customer->setCity($city);
+      if (strlen($zip) > 0)
+        $transaction->customer->setZip($zip);
+
       $transaction->customer->setEmail($contact->get('email', 'default'));
 
       $countries_map = $this->_countries_mapper();
@@ -64,6 +76,11 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
       $country = $contact->get('address:country', 'default');
       if(isset($countries_map[$country])) {
         $transaction->customer->setCountry($countries_map[$country]);
+
+        if ($countries_map[$country] == 'US' || $countries_map[$country] == 'CA') {
+          $transaction->customer->setState($contact->get('address:region', 'default'));
+        }
+        
         $transaction->setAddressHidden();
       }
 
