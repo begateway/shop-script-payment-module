@@ -80,7 +80,7 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
         if ($countries_map[$country] == 'US' || $countries_map[$country] == 'CA') {
           $transaction->customer->setState($contact->get('address:region', 'default'));
         }
-        
+
         $transaction->setAddressHidden();
       }
 
@@ -91,8 +91,15 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
         die;
       }
 
-      header("Location: https://" . $this->DOMAIN_PAYMENTPAGE . "/checkout?token=".$response->getToken());
-      die;
+      if ($this->PAYMENT_PAGE_TYPE == waPayment::OPERATION_INTERNAL_PAYMENT) {
+        $view = wa()->getView();
+        $view->assign('redirect_url', $response->getRedirectUrl());
+        $view->assign('message', _w('Pay by bankcard'));
+        return $view->fetch($this->path.'/templates/payment.html');
+      } else {
+        header("Location: ".$response->getRedirectUrl());
+        die;
+      }
     }
 	}
 

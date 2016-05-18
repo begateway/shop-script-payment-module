@@ -15,3 +15,9 @@ msgstr ""
 
 msgid "Ask your payment processor for these options values"
 msgstr ""
+
+msgid "Payment page type"
+msgstr ""
+
+msgid "Pay by bankcard"
+msgstr "Оплатите банковской картой"
