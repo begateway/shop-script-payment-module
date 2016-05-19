@@ -94,7 +94,7 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
       if ($this->PAYMENT_PAGE_TYPE == waPayment::OPERATION_INTERNAL_PAYMENT) {
         $view = wa()->getView();
         $view->assign('redirect_url', $response->getRedirectUrl());
-        $view->assign('message', _w('Pay by bankcard'));
+        $view->assign('message', $this->_w('Pay by bankcard'));
         return $view->fetch($this->path.'/templates/payment.html');
       } else {
         header("Location: ".$response->getRedirectUrl());
