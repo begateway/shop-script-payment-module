@@ -24,6 +24,7 @@ At the payment module configuration:
     MasterCard__
   * Select a default transaction type: __Payment__ or __Authorization__
   * Enter in fields _Shop Id_, _Shop secret key_, _Payment gateway domain_ and _Payment page domain_ values received from your payment processor.
+  * Select payment page mode: inline iFrame or redirect to your payment processor payment page
 
 ![Module configuration](https://github.com/BeGateway/shop-script-payment-module/raw/master/doc/module-configuration.png)
 
@@ -83,6 +84,7 @@ Issue pull requests or send feature requests.
     MasterCard__
   * Выберите тип платежа: __Payment__ or __Authorization__
   * В полях _Идентификационный номер магазина_, _Секретный ключ магазина_, _Домен платежного шлюза_ и _Домен платежной страницы_ введите значения, полученные от вашей платежной компании.
+  * Выберите способ отображения страницы оплаты заказа: встроенный iFrame или перенаправление на страницу оплаты вашей платежной компании.
 
 ![Настройка способа оплаты](https://github.com/BeGateway/shop-script-payment-module/raw/master/doc/module-configuration-ru.png)
 
