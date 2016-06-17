@@ -51,6 +51,7 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
       $transaction->setFailUrl($url_fail);
       $transaction->setDeclineUrl($url_fail);
       $transaction->setCancelUrl(wa()->getRootUrl(true));
+      $transaction->setAddressHidden();
 
       $firstname = $contact->get('firstname', 'default');
       $lastname = $contact->get('lastname', 'default');
@@ -86,20 +87,27 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
 
       $response = $transaction->submit();
 
-      if(!$response->isSuccess()) {
-        echo $response->getMessage();
-        die;
-      }
+      $view = wa()->getView();
 
-      if ($this->PAYMENT_PAGE_TYPE == waPayment::OPERATION_INTERNAL_PAYMENT) {
-        $view = wa()->getView();
-        $view->assign('redirect_url', $response->getRedirectUrl());
-        $view->assign('message', $this->_w('Pay by bankcard'));
-        return $view->fetch($this->path.'/templates/payment.html');
+      if(!$response->isSuccess()) {
+        $view->assign('error', '1');
+        $view->assign('message', $response->getMessage());
       } else {
-        header("Location: ".$response->getRedirectUrl());
-        die;
+        $view->assign('redirect_url', $response->getRedirectUrl());
+        $view->assign('css', $this->CSS);
+
+        if ($this->PAYMENT_PAGE_TYPE == waPayment::OPERATION_INTERNAL_PAYMENT) {
+          $view->assign('message', $this->_w('Pay by bankcard'));
+          $view->assign('iframe', '1');
+          $view->assign('message_button', $this->_w('Proceed to payment'));
+        } else {
+          $view->assign('iframe', '0');
+          $view->assign('message', $this->_w('Redirection to payment system page to complete payment...'));
+          $view->assign('token', $response->getToken());
+          $view->assign('message_button', $this->_w('Proceed to payment system'));
+        }
       }
+      return $view->fetch($this->path.'/templates/payment.html');
     }
 	}
 

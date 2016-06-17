@@ -44,5 +44,11 @@ return array(
             waPayment::OPERATION_INTERNAL_PAYMENT => /*_wp*/('iFrame'),
             waPayment::OPERATION_HOSTED_PAYMENT_PRIOR_ORDER => /*_wp*/('Redirect')
         ),
+  ),
+  'CSS' => array(
+         'value'        => '',
+         'title'        => /*_wp*/('iFrame CSS'),
+         'description'  => '',
+         'control_type' => waHtmlControl::INPUT,
    )
 );

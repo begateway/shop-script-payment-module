@@ -54,3 +54,12 @@ msgstr ""
 #: //wa-plugins/payment/begateway/lib/begatewayPayment.class.php:97
 msgid "Pay by bankcard"
 msgstr ""
+
+msgid "Redirection to payment system page to complete payment..."
+msgstr ""
+
+msgid "Proceed to payment system"
+msgstr ""
+
+msgid "Proceed to payment"
+msgstr ""
