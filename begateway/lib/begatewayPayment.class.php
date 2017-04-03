@@ -85,6 +85,25 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
         $transaction->setAddressHidden();
       }
 
+      if ($this->ENABLE_BANKCARD) {
+        $cc = new \beGateway\PaymentMethod\CreditCard;
+        $transaction->addPaymentMethod($cc);
+      }
+
+      if ($this->ENABLE_BANKCARD_HALVA) {
+        $halva = new \beGateway\PaymentMethod\CreditCardHalva;
+        $transaction->addPaymentMethod($halva);
+      }
+
+      if ($this->ENABLE_ERIP && strlen($this->ERIP_SERVICE_CODE)>0) {
+        $erip = new \beGateway\PaymentMethod\Erip(array(
+          'order_id' => $order_data['order_id'],
+          'account_number' => $order->id_str,
+          'service_no' => $this->ERIP_SERVICE_CODE
+        ));
+        $transaction->addPaymentMethod($erip);
+      }
+
       $response = $transaction->submit();
 
       $view = wa()->getView();
@@ -125,7 +144,7 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
 	{
     $pattern = "@^([a-z]+)_(\\d+)_(.+)$@";
     $this->request = $request;
-    $this->post = !empty($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : null;
+    $this->post = file_get_contents('php://input');
 
     $this->merchant_id = ifempty($request['wa_merchant_id']);
     $this->app_id = ifempty($request['wa_app_id']);
@@ -169,19 +188,12 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
     switch ($transaction_result) {
       case 'notification':
 
-        $query = new \beGateway\QueryByUid();
-        $query->setUid( $this->webhook->getUid() );
-        $response = $query->submit();
-
-        if (preg_match($pattern,$response->getTrackingId(), $match)) {
-          $order_id = $match[3];
-        }
         $transaction_data = $this->formalizeData($request);
 
-        if($response->isSuccess() && $this->order_id == $order_id) {
+        if($this->webhook->isSuccess()) {
           $money = new \beGateway\Money;
-          $money->setCurrency($response->getResponse()->transaction->currency);
-          $money->setCents($response->getResponse()->transaction->amount);
+          $money->setCurrency($this->webhook->getResponse()->transaction->currency);
+          $money->setCents($this->webhook->getResponse()->transaction->amount);
 
           $app_payment_method = self::CALLBACK_PAYMENT;
           $transaction_data = $this->formalizeData($request);
@@ -190,7 +202,7 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
 					$transaction_data['amount'] = $money->getAmount();
 					$transaction_data['currency_id'] = $money->getCurrency();
 
-          $threeds = ifempty($response->getResponse()->transaction->three_d_secure_verification->pa_status);
+          $threeds = ifempty($this->webhook->getResponse()->transaction->three_d_secure_verification->pa_status);
           if ($threeds) {
             $threeds = '3-D Secure: '.$threeds;
           }
@@ -198,7 +210,7 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
             'UID: '.$this->webhook->getUid(),
             $threeds));
         } else {
-          die;
+          die('ERROR');
         }
         break;
       case 'success':
@@ -227,7 +239,7 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
           'redirect' => $url,
         );
       } else {
-        die;
+        die('OK');
       }
     }
   }
