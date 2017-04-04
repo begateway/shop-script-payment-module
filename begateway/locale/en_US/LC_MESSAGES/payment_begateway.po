@@ -3,14 +3,15 @@ msgstr ""
 "Project-Id-Version: wa-plugins/payment/begateway\n"
 "POT-Creation-Date: 2016-05-19 19:38+0300\n"
 "PO-Revision-Date: \n"
-"Last-Translator:  wa-plugins/payment/begateway\n"
-"Language-Team:  wa-plugins/payment/begateway\n"
+"Last-Translator: wa-plugins/payment/begateway\n"
+"Language-Team: wa-plugins/payment/begateway\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: en_US\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: .\n"
+"Language: en_US\n"
+"X-Generator: Poedit 1.8.12\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: .\n"
 
@@ -62,4 +63,24 @@ msgid "Proceed to payment system"
 msgstr ""
 
 msgid "Proceed to payment"
+msgstr ""
+
+#: /wa-plugins/payment/begateway/lib/config/settings.php:51
+msgid "Enable bankcard payments"
+msgstr ""
+
+#: /wa-plugins/payment/begateway/lib/config/settings.php:59
+msgid "Enable Halva bankcard payments"
+msgstr ""
+
+#: /wa-plugins/payment/begateway/lib/config/settings.php:64
+msgid "Enable ERIP payments"
+msgstr ""
+
+#: /wa-plugins/payment/begateway/lib/config/settings.php:68
+msgid "ERIP service code"
+msgstr ""
+
+#: /wa-plugins/payment/begateway/lib/config/settings.php:74
+msgid "iFrame CSS"
 msgstr ""

@@ -12,7 +12,7 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: .\n"
 "Language: ru_RU\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.12\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: .\n"
 
@@ -65,3 +65,23 @@ msgstr "Перейти на сайт платёжной системы"
 
 msgid "Proceed to payment"
 msgstr "Перейти к оплате"
+
+#: /wa-plugins/payment/begateway/lib/config/settings.php:51
+msgid "Enable bankcard payments"
+msgstr "Включить оплату банковской картой"
+
+#: /wa-plugins/payment/begateway/lib/config/settings.php:59
+msgid "Enable Halva bankcard payments"
+msgstr "Включить оплату банковской картой Халва"
+
+#: /wa-plugins/payment/begateway/lib/config/settings.php:64
+msgid "Enable ERIP payments"
+msgstr "Включение ЕРИП платежи"
+
+#: /wa-plugins/payment/begateway/lib/config/settings.php:68
+msgid "ERIP service code"
+msgstr "Код услуги ЕРИП"
+
+#: /wa-plugins/payment/begateway/lib/config/settings.php:74
+msgid "iFrame CSS"
+msgstr "iFrame CSS"
