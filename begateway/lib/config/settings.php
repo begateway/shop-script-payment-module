@@ -49,7 +49,6 @@ return array(
     'value'        => true,
     'control_type' => waHtmlControl::CHECKBOX,
     'title'        => /*_wp*/('Enable bankcard payments'),
-    )
   ),
   'ENABLE_BANKCARD_HALVA' => array(
     'value'        => false,

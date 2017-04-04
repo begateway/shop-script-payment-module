@@ -76,7 +76,7 @@ msgstr "Включить оплату банковской картой Халв
 
 #: /wa-plugins/payment/begateway/lib/config/settings.php:64
 msgid "Enable ERIP payments"
-msgstr "Включение ЕРИП платежи"
+msgstr "Включить ЕРИП платежи"
 
 #: /wa-plugins/payment/begateway/lib/config/settings.php:68
 msgid "ERIP service code"
