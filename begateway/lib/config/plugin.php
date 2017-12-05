@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return array(
     'name'        => 'beGateway',
     'description' => 'VISA, MasterCard',
