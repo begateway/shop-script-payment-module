@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/begateway-api-php/lib/beGateway.php';
+require_once __DIR__ . '/begateway-api-php/lib/BeGateway.php';
 
 class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel, waIPaymentRefund
 {
@@ -28,12 +28,12 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
       $url_fail = $url.'&transaction_result=fail';
       $url_notification = $url.'&transaction_result=notification';
 
-      $url_notification = str_replace('carts.local', 'webhook.begateway.com:8443', $url_notification);
+      $url_notification = str_replace('0.0.0.0', 'webhook.begateway.com:8443', $url_notification);
 
       $description = preg_replace('/[^\.\?,\[]\(\):;"@\\%\s\w\d]+/', ' ', $order->description);
       $description = preg_replace('/[\s]{2,}/', ' ', $description);
 
-      $transaction = new \beGateway\GetPaymentToken();
+      $transaction = new \BeGateway\GetPaymentToken();
 
       if ($this->PAYMENT_TYPE == waPayment::OPERATION_AUTH_ONLY) {
         $transaction->setAuthorizationTransactionType();
@@ -51,7 +51,6 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
       $transaction->setFailUrl($url_fail);
       $transaction->setDeclineUrl($url_fail);
       $transaction->setCancelUrl(wa()->getRootUrl(true));
-      $transaction->setAddressHidden();
 
       $firstname = $contact->get('firstname', 'default');
       $lastname = $contact->get('lastname', 'default');
@@ -82,26 +81,29 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
           $transaction->customer->setState($contact->get('address:region', 'default'));
         }
 
-        $transaction->setAddressHidden();
       }
 
       if ($this->ENABLE_BANKCARD) {
-        $cc = new \beGateway\PaymentMethod\CreditCard;
+        $cc = new \BeGateway\PaymentMethod\CreditCard;
         $transaction->addPaymentMethod($cc);
       }
 
       if ($this->ENABLE_BANKCARD_HALVA) {
-        $halva = new \beGateway\PaymentMethod\CreditCardHalva;
+        $halva = new \BeGateway\PaymentMethod\CreditCardHalva;
         $transaction->addPaymentMethod($halva);
       }
 
       if ($this->ENABLE_ERIP && strlen($this->ERIP_SERVICE_CODE)>0) {
-        $erip = new \beGateway\PaymentMethod\Erip(array(
+        $erip = new \BeGateway\PaymentMethod\Erip(array(
           'order_id' => $order_data['order_id'],
           'account_number' => $order->id_str,
           'service_no' => $this->ERIP_SERVICE_CODE
         ));
         $transaction->addPaymentMethod($erip);
+      }
+
+      if ($this->ENABLE_TEST_MODE) {
+        $transaction->setTestMode(true);
       }
 
       $response = $transaction->submit();
@@ -113,18 +115,9 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
         $view->assign('message', $response->getMessage());
       } else {
         $view->assign('redirect_url', $response->getRedirectUrl());
-        $view->assign('css', $this->CSS);
-
-        if ($this->PAYMENT_PAGE_TYPE == waPayment::OPERATION_INTERNAL_PAYMENT) {
-          $view->assign('message', $this->_w('Pay by bankcard'));
-          $view->assign('iframe', '1');
-          $view->assign('message_button', $this->_w('Proceed to payment'));
-        } else {
-          $view->assign('iframe', '0');
-          $view->assign('message', $this->_w('Redirection to payment system page to complete payment...'));
-          $view->assign('token', $response->getToken());
-          $view->assign('message_button', $this->_w('Proceed to payment system'));
-        }
+        $view->assign('token', $response->getToken());
+        $view->assign('checkoutUrl', \BeGateway\Settings::$checkoutBase);
+        $view->assign('message_button', $this->_w('Proceed to payment'));
       }
       return $view->fetch($this->path.'/templates/payment.html');
     }
@@ -152,7 +145,7 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
 
     if ($this->post && empty($request['token'])) {
       $this->init();
-      $this->webhook = new \beGateway\Webhook();
+      $this->webhook = new \BeGateway\Webhook();
 
       if ($this->webhook->getResponse()) {
         $tracking_id = $this->webhook->getResponse()->transaction->tracking_id;
@@ -191,7 +184,7 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
         $transaction_data = $this->formalizeData($request);
 
         if($this->webhook->isSuccess()) {
-          $money = new \beGateway\Money;
+          $money = new \BeGateway\Money;
           $money->setCurrency($this->webhook->getResponse()->transaction->currency);
           $money->setCents($this->webhook->getResponse()->transaction->amount);
 
@@ -281,10 +274,9 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
 
   protected function init() {
     parent::init();
-    \beGateway\Settings::$gatewayBase = 'https://' . $this->DOMAIN_GATEWAY;
-    \beGateway\Settings::$checkoutBase = 'https://' . $this->DOMAIN_PAYMENTPAGE;
-    \beGateway\Settings::$shopId = $this->SHOP_ID;
-    \beGateway\Settings::$shopKey = $this->SHOP_KEY;
+    \BeGateway\Settings::$checkoutBase = 'https://' . $this->DOMAIN_PAYMENTPAGE;
+    \BeGateway\Settings::$shopId = $this->SHOP_ID;
+    \BeGateway\Settings::$shopKey = $this->SHOP_KEY;
     return parent::init();
   }
 }
