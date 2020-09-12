@@ -28,7 +28,6 @@ return array(
          'title'        => /*_wp*/('Payment page domain'),
          'description'  => /*_wp*/('Ask your payment processor for these options values'),
          'control_type' => waHtmlControl::INPUT,
-   )
   ),
   'ENABLE_BANKCARD' => array(
     'value'        => true,
@@ -44,6 +43,11 @@ return array(
     'value'        => false,
     'control_type' => waHtmlControl::CHECKBOX,
     'title'        => /*_wp*/('Enable ERIP payments'),
+  ),
+  'ENABLE_TEST_MODE' => array(
+    'value'        => false,
+    'control_type' => waHtmlControl::CHECKBOX,
+    'title'        => /*_wp*/('Enable Test mode'),
   ),
   'ERIP_SERVICE_CODE' => array(
          'value'        => '99999999',
