@@ -20,11 +20,10 @@
 At the payment module configuration:
 
   * Enter a name of the payment method e.g. __Pay by credit or debit card__
-  * Optionally enter a description of the payment e.g. __VISA,
-    MasterCard__
+  * Optionally enter a description of the payment e.g. __Visa,
+    Mastercard__
   * Select a default transaction type: __Payment__ or __Authorization__
-  * Enter in fields _Shop Id_, _Shop secret key_, _Payment gateway domain_ and _Payment page domain_ values received from your payment processor.
-  * Select payment page mode: inline iFrame or redirect to your payment processor payment page
+  * Enter in fields _Shop Id_, _Shop secret key_ and _Payment page domain_ values received from your payment processor.
 
 ![Module configuration](https://github.com/BeGateway/shop-script-payment-module/raw/master/doc/module-configuration.png)
 
@@ -41,22 +40,24 @@ payments with a demo gateway.
 
   * Shop Id __361__
   * Shop secret key __b8647b68898b084b836474ed8d61ffe117c9a01168d867f24953b776ddcb134d__
-  * Payment gateway domain __demo-gateway.begateway.com__
   * Payment page domain __checkout.begateway.com__
 
 
-Use the test data to make a test payment:
+### Test card details
 
-  * card number __4200000000000000__
-  * card name __John Doe__
-  * card expiry month __01__ to get a success payment
-  * card expiry month __10__ to get a failed payment
-  * CVC __123__
+  * Card ```4200000000000000``` to get succesful payment
+  * Card ```4005550000000019``` to get failed payment
+  * Card name ```JOHN DOE```
+  * Card expiry date ```01/30```
+  * CVC ```123```
+
+### ERIP test service code
+
+  * Use `99999999` to emulate test ERIP payments
 
 ### Contributing
 
 Issue pull requests or send feature requests.
-
 
 ## Модуль оплаты Shop-Script
 
@@ -80,11 +81,10 @@ Issue pull requests or send feature requests.
 На странице настройки способа оплаты:
 
   * Введите имя способа оплаты. Например, __Оплата банковской картой__
-  * Можете добавить необязательное описание способа оплаты. Например, __VISA,
-    MasterCard__
+  * Можете добавить необязательное описание способа оплаты. Например, __Visa,
+    Mastercard__
   * Выберите тип платежа: __Payment__ or __Authorization__
-  * В полях _Идентификационный номер магазина_, _Секретный ключ магазина_, _Домен платежного шлюза_ и _Домен платежной страницы_ введите значения, полученные от вашей платежной компании.
-  * Выберите способ отображения страницы оплаты заказа: встроенный iFrame или перенаправление на страницу оплаты вашей платежной компании.
+  * В полях _Идентификационный номер магазина_, _Секретный ключ магазина_ и _Домен платежной страницы_ введите значения, полученные от вашей платежной компании.
 
 ![Настройка способа оплаты](https://github.com/BeGateway/shop-script-payment-module/raw/master/doc/module-configuration-ru.png)
 
@@ -101,14 +101,16 @@ Issue pull requests or send feature requests.
 
   * Идентификационный номер магазина __361__
   * Секретный ключ магазина __b8647b68898b084b836474ed8d61ffe117c9a01168d867f24953b776ddcb134d__
-  * Домен платежного шлюза __demo-gateway.begateway.com__
   * Домен платежной страницы __checkout.begateway.com__
 
+#### Тестовые карты
 
-Используйте следующий тестовый набор для тестового платежа:
+  * Карта ```4200000000000000``` для успешной оплаты
+  * Карта ```4005550000000019``` для неуспешной оплаты
+  * Имя на карте ```JOHN DOE```
+  * Срок действия карты ```01/30```
+  * CVC ```123```
 
-  * номер карты __4200000000000000__
-  * имя на карте __John Doe__
-  * месяц срока действия карты __01__, чтобы получить успешный платеж
-  * месяц срока действия карты __10__, чтобы получить неуспешный платеж
-  * CVC __123__
+#### Тестовый код услуги ЕРИП
+
+  * `99999999`, чтобы получить уведомление о успешной оплате через ЕРИП

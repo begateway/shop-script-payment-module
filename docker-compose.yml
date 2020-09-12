@@ -11,16 +11,16 @@ services:
       - 80:80
     tty: true
     volumes:
-      - ./begateway:/var/www/html/wa-plugins/payment/begateway
+      - ./begateway:/begateway
 
-  webasyst7:
+  shopscript7:
     build:
       args:
         webasyst_version: 7
       <<: *build
     <<: *webasyst
 
-  webasyst8:
+  shopscript8:
     build:
       args:
         webasyst_version: 8
