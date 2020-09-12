@@ -1,74 +1,56 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: wa-plugins/payment/begateway\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-07 20:40+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2016-05-19 19:38+0300\n"
+"PO-Revision-Date: \n"
 "Last-Translator: wa-plugins/payment/begateway\n"
 "Language-Team: wa-plugins/payment/begateway\n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Loco-Source-Locale: ru_BY\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Loco https://localise.biz/\n"
+"Language: en\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: .\n"
-"\n"
-"X-Loco-Parser: loco_parse_po"
 
-#: wa-plugins/payment/begateway/lib/config/settings.php:6
 msgid "Shop Id"
 msgstr ""
 
-#: wa-plugins/payment/begateway/lib/config/settings.php:12
 msgid "Shop secret key"
 msgstr ""
 
-#: wa-plugins/payment/begateway/lib/config/settings.php:18
 msgid "Transaction type"
 msgstr ""
 
-#: wa-plugins/payment/begateway/lib/config/settings.php:28
 msgid "Payment gateway domain"
 msgstr ""
 
-#: wa-plugins/payment/begateway/lib/config/settings.php:29 
-#: wa-plugins/payment/begateway/lib/config/settings.php:35
 msgid "Ask your payment processor for these options values"
 msgstr ""
 
-#: wa-plugins/payment/begateway/lib/config/settings.php:34
 msgid "Payment page domain"
 msgstr ""
 
-#: wa-plugins/payment/begateway/lib/config/settings.php:40
 msgid "Payment page type"
-msgstr ""
-
-#: wa-plugins/payment/begateway/lib/begatewayPayment.class.php:97
-msgid "Pay by bankcard"
 msgstr ""
 
 msgid "Proceed to payment"
 msgstr ""
 
-#: wa-plugins/payment/begateway/lib/config/settings.php:51
 msgid "Enable bankcard payments"
 msgstr ""
 
-#: wa-plugins/payment/begateway/lib/config/settings.php:59
 msgid "Enable Halva bankcard payments"
 msgstr ""
 
-#: wa-plugins/payment/begateway/lib/config/settings.php:64
 msgid "Enable ERIP payments"
 msgstr ""
 
-#: wa-plugins/payment/begateway/lib/config/settings.php:68
 msgid "ERIP service code"
+msgstr ""
+
+msgid "Enable Test mode"
 msgstr ""
