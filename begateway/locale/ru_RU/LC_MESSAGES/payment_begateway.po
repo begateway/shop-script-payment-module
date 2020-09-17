@@ -16,72 +16,41 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: .\n"
 
-#: //wa-plugins/payment/begateway/lib/config/settings.php:6
 msgid "Shop Id"
 msgstr "Id магазина"
 
-#: //wa-plugins/payment/begateway/lib/config/settings.php:12
 msgid "Shop secret key"
 msgstr "Секретный ключ магазина"
 
-#: //wa-plugins/payment/begateway/lib/config/settings.php:18
 msgid "Transaction type"
 msgstr "Тип операции"
 
-#: //wa-plugins/payment/begateway/lib/config/settings.php:28
 msgid "Payment gateway domain"
 msgstr "Домен платежного шлюза"
 
-#: //wa-plugins/payment/begateway/lib/config/settings.php:29
-#: //wa-plugins/payment/begateway/lib/config/settings.php:35
 msgid "Ask your payment processor for these options values"
 msgstr "Узнайте значениe этого параметра у вашей платежной компании"
 
-#: //wa-plugins/payment/begateway/lib/config/settings.php:34
 msgid "Payment page domain"
 msgstr "Домен платежной страницы"
 
-#: //wa-plugins/payment/begateway/lib/config/settings.php:40
 msgid "Payment page type"
 msgstr "Тип страницы оплаты"
-
-#: //wa-plugins/payment/begateway/lib/config/settings.php:44
-msgid "iFrame"
-msgstr "iFrame (встроенная)"
-
-#: //wa-plugins/payment/begateway/lib/config/settings.php:45
-msgid "Redirect"
-msgstr "Перенаправление"
-
-#: //wa-plugins/payment/begateway/lib/begatewayPayment.class.php:97
-msgid "Pay by bankcard"
-msgstr "Оплатить с помощью банковской карты"
-
-msgid "Redirection to payment system page to complete payment..."
-msgstr "Перенаправление на сайт платёжной системы для оплаты..."
-
-msgid "Proceed to payment system"
-msgstr "Перейти на сайт платёжной системы"
 
 msgid "Proceed to payment"
 msgstr "Перейти к оплате"
 
-#: /wa-plugins/payment/begateway/lib/config/settings.php:51
 msgid "Enable bankcard payments"
 msgstr "Включить оплату банковской картой"
 
-#: /wa-plugins/payment/begateway/lib/config/settings.php:59
 msgid "Enable Halva bankcard payments"
 msgstr "Включить оплату банковской картой Халва"
 
-#: /wa-plugins/payment/begateway/lib/config/settings.php:64
 msgid "Enable ERIP payments"
 msgstr "Включить ЕРИП платежи"
 
-#: /wa-plugins/payment/begateway/lib/config/settings.php:68
 msgid "ERIP service code"
 msgstr "Код услуги ЕРИП"
 
-#: /wa-plugins/payment/begateway/lib/config/settings.php:74
-msgid "iFrame CSS"
-msgstr "iFrame CSS"
+msgid "Enable Test mode"
+msgstr "Включить тестовый режим"

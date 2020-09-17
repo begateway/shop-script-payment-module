@@ -2,47 +2,19 @@
   <i class="icon16 error"></i>
   <em>{$message}</em>
 {else}
-  {if $iframe}
-    <div id='paymentText'>
-      <em>{$message}</em>
-    </div>
-    <div id='paymentForm' style='margin: 0 auto; width: 400px;'></div>
-    <script type='text/javascript'>
-      (function(){
-        $.ajax({
-          url: 'https://js.begateway.com/begateway-1-latest.min.js',
-          dataType: 'script',
-          cache: true, // otherwise will get fresh copy every page load
-          success: function(){
-            setTimeout(
-              function(){
-                pf = new BeGateway({
-                  type: 'inline',
-                  id: 'paymentForm',
-                  url: "{$redirect_url}",
-                  style: "{$css}",
-                  size: { width: 320, height: 380 }
-                });
-                pf.buildForm();
-              },
-            3000);
-          }
-        });
-      })();
-    </script>
-  {else}
-    <form id="payment-form" action="{$redirect_url}" method="post" target="_top">
-      <input type='hidden' name='token' value='{$token|escape}'>
-      <i class="icon16 loading"></i><em>{$message}</em>
-      <br><br>
+  <script type="text/javascript" src="https://js.bepaid.by/widget/be_gateway.js"></script>
+  <script type="text/javascript">
+    this.payment = function() {
+      var params = {
+        checkout_url: "{$checkoutUrl}",
+        token: "{$token|escape}",
+        checkout: {
+          iframe: true
+        }
+      };
 
-      <script type="text/javascript">
-        setTimeout(function () {
-          document.getElementById('payment-form').submit();
-        }, 3000);
-      </script>
-
-      <input type="submit" value="{$message_button}">
-    </form>
-  {/if}
+      new BeGateway(params).createWidget();
+    };
+  </script>
+  <button type="button" class="js-show-edit-form" onclick="payment()">{$message_button}</button>
 {/if}

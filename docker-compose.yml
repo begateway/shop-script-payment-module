@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  webasyst: &webasyst
+    build: &build
+      context: ./docker
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    ports:
+      - 80:80
+    tty: true
+    volumes:
+      - ./begateway:/begateway
+
+  shopscript7:
+    build:
+      args:
+        webasyst_version: 7
+      <<: *build
+    <<: *webasyst
+
+  shopscript8:
+    build:
+      args:
+        webasyst_version: 8
+      <<: *build
+    <<: *webasyst
+
+  mysql:
+    image: mysql:5.5
+    volumes:
+      - /var/lib/mysql
+      - ./docker/etc/mysql/mysql.conf.d/sql_mode.cnf:/etc/mysql/mysql.conf.d/sql_mode.cnf
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: webasyst
