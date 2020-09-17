@@ -143,6 +143,8 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
     $this->app_id = ifempty($request['wa_app_id']);
     $this->order_id = ifempty($request['wa_order_id']);
 
+    $error = true;
+
     if ($this->post && empty($request['token'])) {
       $this->init();
       $this->webhook = new \BeGateway\Webhook();
@@ -157,8 +159,13 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
           $this->app_id = $match[1];
           $this->merchant_id = $match[2];
           $this->order_id = $match[3];
+          $error = false;
         }
       }
+    }
+
+    if ($error) {
+      die('invalid callback data');
     }
 
 		return parent::callbackInit($request);
@@ -167,10 +174,8 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
   protected function callbackHandler($request)
   {
     if (!$this->order_id || !$this->app_id || !$this->merchant_id) {
-            throw new waPaymentException('invalid invoice number');
+      die('invalid invoice number');
     }
-
-    $pattern = "@^([a-z]+)_(\\d+)_(.+)$@";
 
     $transaction_result = ifempty($request['transaction_result'], 'success');
 
@@ -202,8 +207,6 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
           $transaction_data['view_data'] = implode(' ', array(
             'UID: '.$this->webhook->getUid(),
             $threeds));
-        } else {
-          die('ERROR');
         }
         break;
       case 'success':
