@@ -143,9 +143,10 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
     $this->app_id = ifempty($request['wa_app_id']);
     $this->order_id = ifempty($request['wa_order_id']);
 
-    $error = true;
+    $error = false;
 
     if ($this->post && empty($request['token'])) {
+      $error = true;
       $this->init();
       $this->webhook = new \BeGateway\Webhook();
 
@@ -188,7 +189,7 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
 
         $transaction_data = $this->formalizeData($request);
 
-        if($this->webhook->isSuccess()) {
+        if($this->webhook->isSuccess() && $this->webhook->isAuthorized()) {
           $money = new \BeGateway\Money;
           $money->setCurrency($this->webhook->getResponse()->transaction->currency);
           $money->setCents($this->webhook->getResponse()->transaction->amount);
