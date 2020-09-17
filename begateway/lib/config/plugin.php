@@ -5,7 +5,7 @@ return array(
     'icon'        => 'img/begateway16.png',
     'logo'        => 'img/begateway.png',
     'vendor'      => 'beGateway',
-    'version'     => '1.3.0',
+    'version'     => '1.3.1',
     'locale'      => array('en_EN','ru_RU'),
     'type'        => waPayment::TYPE_ONLINE,
 );
