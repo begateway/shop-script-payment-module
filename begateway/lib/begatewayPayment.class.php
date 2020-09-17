@@ -94,9 +94,15 @@ class begatewayPayment extends waPayment implements waIPayment, waIPaymentCancel
       }
 
       if ($this->ENABLE_ERIP && strlen($this->ERIP_SERVICE_CODE)>0) {
+        if (isset($order_data['id_str'])) {
+          $account_number = preg_replace('/^\W+/', '', $order_data['id_str']);
+        } else {
+          $account_number = $order_data['order_id'];
+        }
+
         $erip = new \BeGateway\PaymentMethod\Erip(array(
           'order_id' => $order_data['order_id'],
-          'account_number' => $order->id_str,
+          'account_number' => $account_number,
           'service_no' => $this->ERIP_SERVICE_CODE
         ));
         $transaction->addPaymentMethod($erip);
