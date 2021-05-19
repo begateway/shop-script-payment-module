@@ -23,12 +23,12 @@ services:
   shopscript8:
     build:
       args:
-        webasyst_version: 8
+        webasyst_version: 8.18
       <<: *build
     <<: *webasyst
 
   mysql:
-    image: mysql:5.5
+    image: mysql:5.6
     volumes:
       - /var/lib/mysql
       - ./docker/etc/mysql/mysql.conf.d/sql_mode.cnf:/etc/mysql/mysql.conf.d/sql_mode.cnf
