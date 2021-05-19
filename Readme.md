@@ -31,7 +31,7 @@ At the payment module configuration:
 
 ### Notes
 
-Tested and developed with Shop-Script 6, Shop-Script 7
+Tested and developed with Shop-Script 6/7/8
 
 ### Demo credentials
 
@@ -92,7 +92,7 @@ Issue pull requests or send feature requests.
 
 ### Примечания
 
-Разработанно и протестированно с Shop-Script 6, Shop-Script 7
+Разработанно и протестировано с Shop-Script 6/7/8
 
 ### Тестовые данные
 
